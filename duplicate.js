@@ -1,17 +1,16 @@
-function sockMerchant(n, ar) {
-  const b = ar.sort();
-  const pairFounded = [];
- 
-  const pairs = b.reduce((acc, curr, index, arr) => {
-    if(acc.includes(curr)) {
-      pairFounded.push(curr)
+function findDuplicates(ar) {
+  const pairs = ar.reduce((acc, curr) => {
+    if (acc.hasOwnProperty(curr)) {
+      return {
+        ...acc,
+        [curr]: acc[curr] + 1
+      };
     }
-    return [...acc, curr]
-  }, [])
-  
+    return {
+      ...acc,
+      [curr]: 1
+    };
+  }, {});
 
-  console.log(pairs, pairFounded)
-
+  console.log(ar, pairs);
 }
-
-sockMerchant(9, [10, 10, 2, 4, 3, 5, 7, 4, 2])

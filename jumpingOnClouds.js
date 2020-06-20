@@ -1,38 +1,18 @@
 function jumpingOnClouds(c) {
-  const result = c.reduce((acc, curr, index, arr) => {
-    if(curr === 0 && index === 0) {
-      return {
-        jump: 0,
-        lastCloud: curr
-      }
+  let jumps = 0;
+  let index = 0;
+
+  while (index < c.length - 1) {
+    if (index === c.length || c[index + 2] === 1) {
+      index += 1;
+      jumps += 1;
+    } else {
+      index += 2;
+      jumps += 1;
     }
+  }
 
-    if(curr === 0 && acc.lastCloud === 1) {
-      return {
-        jump: ++acc.jump,
-        lastCloud: curr
-      }
-    }
-
-    if(curr === 1 && acc.lastCloud === 0) {
-      return {
-        jump: ++acc.jump,
-        lastCloud: curr
-      }
-    }
-  
-    return {
-      ...acc,
-      lastCloud: curr
-    }
-
-  }, {
-    jump: 0,
-    lastCloud: undefined
-  })
-
-  console.log(result)
-
+  return jumps;
 }
 
-jumpingOnClouds([ 0, 0, 1, 0, 0, 0, 0, 1, 0, 0 ])
+jumpingOnClouds([0, 0, 1, 0, 0, 1, 0]);
